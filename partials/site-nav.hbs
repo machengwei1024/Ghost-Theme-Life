@@ -1,0 +1,13 @@
+<header class="blog-header">
+    <a href="{{@blog.url}}" class="blog-header-mobile-title">{{@blog.title}}</a>
+    <a href="javascript:;" class="blog-header-navbar-btn"><i class="fa fa-bars"></i></a>
+    <nav class="blog-header-navbar blog-header-fixed">
+          {{navigation}}
+    </nav>
+</header>
+            <script type="text/javascript">
+                  $(".blog-header-navbar>ul").removeClass("nav").addClass("blog-navbar-links");
+                  $(".blog-header-navbar>ul>li").addClass("blog-nav-item");
+                  $(".blog-header-navbar>ul>li>a").addClass("transition");
+                  $(".blog-header-navbar>ul").append('<div class="blog-navbar-right"><form action=""><div class="input-group"><input type="text" class="blog-header-search" placeholder="search..."><buttn type="submit" class="blog-header-search-btn"><i class="fa fa-search"></i></buttn></div></form></div>')
+            </script>

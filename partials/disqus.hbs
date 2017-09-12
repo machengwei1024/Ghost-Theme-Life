@@ -1,0 +1,25 @@
+<div id="disqus_thread"></div>
+<script data-no-instant>
+    $(document).ready(function() {
+        $('.post-comments-btn').on('click', function(){
+            $.ajax({
+                type: "GET",
+                url: "https://" + disqus.name + ".disqus.com/embed.js",
+                dataType: "script",
+                cache: true
+            });
+            $('.post-more-function-br').css('height','.6em');
+        });
+    });
+    var reset = function (newIdentifier, newUrl, newTitle, newLanguage) {
+        DISQUS.reset({
+            reload: true,
+            config: function () {
+                this.page.identifier = newIdentifier;
+                this.page.url = newUrl;
+                this.page.title = newTitle;
+                this.language = newLanguage;
+            }
+        });
+    };
+</script>

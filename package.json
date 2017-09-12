@@ -1,0 +1,44 @@
+{
+      "name": "life",
+      "description": "记录生活，为写作而生",
+      "demo": "https://weic.me/themes-life/",
+      "version": "1.0",
+      "engines": {
+      "ghost": ">=1.0"
+},
+"license": "MIT",
+"screenshots": {
+      "desktop": "assets/screenshot-desktop.jpg",
+      "mobile": "assets/screenshot-mobile.jpg"
+},
+"author": {
+      "name": "Weic",
+      "email": "i@weic.me",
+      "url": "https://weic.me/"
+},
+"gpm": {
+      "type": "theme",
+      "categories": [
+      "Minimal",
+      "Magazine"
+]
+},
+"keywords": [
+      "ghost",
+      "theme",
+      "Weic"
+],
+"repository": {
+      "type": "git",
+      "url": "https://github.com/Weic96/Theme-Ghost-Life"
+},
+"bugs": "https://github.com/Weic96/Theme-Ghost-Life/issues",
+"contributors": "https://github.com/Weic96/Theme-Ghost-Life/graphs/contributors",
+"devDependencies": {
+      "bootstarp": "V4.x",
+      "jquery": "V2.2.4"
+},
+"config": {
+      "posts_per_page": 5
+}
+}

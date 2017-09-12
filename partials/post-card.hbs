@@ -1,0 +1,26 @@
+<article class="blog-post-block">
+{{#if feature_image}}
+ <header>
+      <div class="blog-post-block-img">
+          <img src="{{feature_image}}" alt="" />
+      </div>
+ </header>
+{{/if}}
+
+<div class="blog-post-block-padding">
+ <a href="{{url}}">{{title}}</a>
+ <section>
+      {{excerpt characters="100"}}
+ </section>
+ <footer>
+      <time datetime="{{date format="YYYY-MM-DD"}}"><i class="fa fa-clock-o"></i>{{date format="YYYY-MM-DD"}}</time>
+      <span><i class="fa fa-user-o"></i>
+          <a href="" itemprop="url" rel="index">{{author.name}}</a>
+      </span>
+       <span>
+            <i class="fa fa-eye"></i>
+            <span id="{{url}}" class="views"  title="{{title}}"></span>
+       </span>
+ </footer>
+</div>
+</article>

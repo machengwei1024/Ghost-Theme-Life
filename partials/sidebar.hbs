@@ -1,0 +1,65 @@
+<!--博客侧边栏开始-->
+        <div class="col-xl-3 blog-sidebar">
+            <div class="blog-sidebar-title">
+                <a href="">{{@blog.title}}</a>
+            </div>
+            <div class="blog-sidebar-logo">
+                <img src="{{ @blog.logo }}" />
+            </div>
+            <div class="blog-sidebar-count blog-sidebar-padding">
+                <div class="blog-sidebar-count-left">
+                  {{#get "posts" as |posts postsObj|}}
+                  <p class="blog-sidebar-count-p">{{postsObj.total}}</p>
+                  {{/get}}
+                  <span class="blog-sidebar-count-span">文章</span>
+                </div>
+                <div class="blog-sidebar-count-right">
+                  {{#get "tags" as |tags tagsObj|}}
+                  <p class="blog-sidebar-count-p">{{tagsObj.total}}</p>
+                  {{/get}}
+                  <span class="blog-sidebar-count-span">标签</span>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="blog-sidebar-icon blog-sidebar-padding">
+                <ul>
+                    <li><a href="" class="icon-github" target="_blank" data-toggle="tooltip" data-placement="top" title="Github"><i class="fa fa-github"></i></a></li>
+                    <li><a href="" class="icon-weibo" target="_blank" data-toggle="tooltip" data-placement="top" title="新浪微博"><i class="fa fa-weibo"></i></a></li>
+                    <li><a href="" class="icon-twitter" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                    <!--<li><a href="" class="icon-facebook" target="_blank" data-toggle="tooltip" data-placement="top" title="FaceBook"><i class="fa fa-facebook"></i></a></li>-->
+                    <li><a href="mailto:" class="icon-email" data-toggle="tooltip" data-placement="top" title="E-Mail"><i class="fa fa-envelope"></i></a></li>
+                    <li><a href="" class="icon-rss" data-toggle="tooltip" target="_blank" data-placement="top" title="RSS"><i class="fa fa-rss"></i></a></li>
+                </ul>
+                <script type="text/javascript">
+                      $(".icon-github").attr("href",siteInfo.github);
+                      $(".icon-weibo").attr("href",siteInfo.weibo);
+                      $(".icon-twitter").attr("href",siteInfo.twitter);
+                  //     $(".icon-facebook").attr("href",siteInfo.facebook);
+                      $(".icon-email").attr("href",siteInfo.email);
+                      $(".icon-rss").attr("href",siteInfo.rss);
+                </script>
+            </div>
+            <div class="blog-sidebar-tags">
+                <h4 class="blog-sidebar-h4"><i class="fa fa-tag"></i>&nbsp;标签云</h4>
+                <ul class="blog-sidebar-tags-ul blog-sidebar-padding">
+                  {{#get "tags" limit="all" include="count.posts" order="count.posts desc" }}
+                  {{#foreach tags}}
+                        <li><a href="/tag/{{slug}}" class="tag-could" data-toggle="tooltip" data-placement="top" title="{{name}}">{{name}}</a></li>
+                  {{/foreach}}
+                  {{/get}}
+                </ul>
+            </div>
+            <script>
+              // 博客侧栏标签云随机色
+              var tag_cloud = $('.tag-could');
+              tag_cloud.each(function () {
+                  var Cnum = 9;
+                  var Crand = parseInt(Math.random() * Cnum);
+                  $(this).addClass("tag-could" + Crand);
+              })
+            </script>
+            <!--返回顶部按钮-->
+            <div class="retop">
+                <i class="fa fa-angle-up"></i>
+            </div>
+        </div><!--博客侧边栏结束-->

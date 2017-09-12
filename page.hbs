@@ -1,0 +1,16 @@
+{{!< default}}
+
+{{#post}}
+<header class="blog-post-page-title">
+    <h4>{{ title }}</h4>
+    <time datetime="{{date format="YYYY-MM-DD"}}"><i class="fa fa-clock-o"></i>{{date format="YYYY-MM-DD"}}</time>
+</header>
+<div class="blog-main-post blog-post-page-box">
+    <article class="blog-post-block blog-post-page-content">
+        <section>
+             {{content}}
+        </section>
+        <footer class="blog-post-page-tags"></footer>
+    </article>
+</div>
+{{/post}}

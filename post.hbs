@@ -1,0 +1,154 @@
+{{!< default}}
+
+{{#post}}
+<header class="blog-post-page-title">
+    <h4>{{ title }}</h4>
+    <time datetime="{{date format="YYYY-MM-DD"}}"><i class="fa fa-clock-o"></i>{{date format="YYYY-MM-DD"}}</time>
+   {{!-- 文章阅读次数 --}}
+    <span>
+        <i class="fa fa-eye"></i>
+        <span id="{{url}}" class="views views-post"  title="{{title}}"></span>
+    </span>
+
+</header>
+<div class="blog-main-post blog-post-page-box">
+    <article class="blog-post-block blog-post-page-content">
+        <section>
+             {{content}}
+        </section>
+        <footer class="blog-post-page-tags">
+             {{#primary_tag}}
+               <a href="{{ url }}" rel="tag" data-toggle="tooltip" data-placement="top" title="Linux">{{ name }}</a>
+             {{/primary_tag}}
+        </footer>
+    </article>
+    <article class="blog-post-page-readmore">
+          {{!-- 下一篇 --}}
+          {{#prev_post}}
+            <a href="{{ url }}" class="blog-post-page-readmore-next" data-toggle="tooltip" data-placement="top" title="{{ title }}">上一篇</a>
+          {{/prev_post}}
+          {{!-- 上一篇 --}}
+          {{#next_post}}
+            <a href="{{ url }}" class="blog-post-page-readmore-prev" data-toggle="tooltip" data-placement="top" title="{{ title }}">下一篇</a>
+          {{/next_post}}
+        <div style="clear: both;"></div>
+    </article>
+
+    <article class="blog-post-block blog-post-page-content">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span class="post-comments-btn btn btn-info btn-block" data-toggle="tooltip" data-placement="top" title="本站采用Disqus评论组件，若您没有科学上网可能会无法查看并评论">加载评论</span>
+                </div>
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span data-toggle="modal" data-target=".post-extend-btn-donate-modal">
+                        <span id="post-donate-btn" class="btn btn-danger btn-block" data-toggle="tooltip" data-placement="top" title="如果您觉得本文还不错或者对您有帮助，可以考虑打赏一下作者哦">打赏本文</span>
+                    </span>
+                </div>
+                <div class="col-md-4 col-sm-4 post-page-more-btn">
+                    <span data-toggle="modal" data-target=".post-extend-btn-qrcode-modal">
+                        <span><span id="post-qrcode-btn" class="btn btn-success btn-block" data-toggle="tooltip" data-placement="top" title="微信扫描二维码手机端查看本文及分享本文">二维码</span></span>
+                    </span>
+                </div>
+            </div>
+            <div class="post-more-function-br"></div>
+
+            <!-- 打赏弹出 -->
+            <div class="modal fade post-extend-btn-donate-modal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                              <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">打赏本文</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                    </button>
+                              </div>
+                              <div class="modal-body">
+                                    <div class="row post-donate-content">
+                                          <div class="col-md-4 post-donate-alipay">
+                                                <p>支付宝</p>
+                                                <script type="text/javascript">
+                                                      $(".post-donate-alipay").append("<img class='post-donate-content-img no-lightbox' src='"+siteInfo.alipay+"'/>");
+                                                </script>
+                                          </div>
+                                          <div class="col-md-4 post-donate-wechatpay">
+                                                <p>微信</p>
+                                                <script type="text/javascript">
+                                                      $(".post-donate-wechatpay").append("<img class='post-donate-content-img no-lightbox' src='"+siteInfo.wechatpay+"'/>");
+                                                </script>
+                                          </div>
+                                          <div class="col-md-4 post-donate-tenpay">
+                                                <p>财付通</p>
+                                                <script type="text/javascript">
+                                                      $(".post-donate-tenpay").append("<img class='post-donate-content-img no-lightbox' src='"+siteInfo.tenpay+"'/>");
+                                                </script>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-info" data-dismiss="modal">关闭</button>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <!-- 二维码弹出 -->
+            <div class="modal fade post-extend-btn-qrcode-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                              <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">文章二维码</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                    </button>
+                              </div>
+                              <div class="modal-body">
+                                    <div class="row post-qrcode-content">
+                                          <span class="post-qrcode-content-canvas"></span>
+                                          <img class="post-qrcode-content-img no-lightbox" src="" />
+                                    </div>
+                              </div>
+                              <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-info" data-dismiss="modal">关闭</button>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+
+            {{!-- 文章页二维码生成脚本 --}}
+        <script>
+            // post QRcode
+            // 中文转码
+            function toUtf8(str) {
+                var out, i, len, c;
+                out = "";
+                len = str.length;
+                for (i = 0; i < len; i++) {
+                    c = str.charCodeAt(i);
+                    if ((c >= 0x0001) && (c <= 0x007F)) {
+                        out += str.charAt(i);
+                    } else if (c > 0x07FF) {
+                        out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                        out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    } else {
+                        out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+                        out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+                    }
+                }
+                return out;
+            }
+            // 生成
+            var qrcode= $('.post-qrcode-content-canvas').qrcode({width: 150,height: 150,text: toUtf8("{{@blog.url}}{{url}}")}).hide();
+            var canvas=qrcode.find('canvas').get(0);
+            $('.post-qrcode-content-img').attr('src',canvas.toDataURL('image/jpg'));
+        </script>
+
+        {{!-- Disqus评论开始 --}}
+        {{> "disqus"}}
+        {{!-- Disqus评论结束 --}}
+
+        {{!-- Valine评论开始 --}}
+        {{> "valine"}}
+        {{!-- Valine评论结束 --}}
+        
+</div>
+{{/post}}

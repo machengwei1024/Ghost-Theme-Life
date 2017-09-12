@@ -1,0 +1,17 @@
+{{!--        Valine评论模块，Valine项目地址：https://github.com/xCss/Valine       --}}
+<br><br>
+<article class="post-readme-more">
+      <div class="comment"></div>
+      <script>
+            var valine = new Valine({
+            // AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+            av: AV,
+            notify: true, // 邮件提醒
+            verify: true, // 验证码
+            el: '.comment', //
+            app_id: leanCloud.App_ID, // 这里填写上面得到的APP ID
+            app_key: leanCloud.App_Key, // 这里填写上面得到的APP KEY
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!' // [v1.0.7 new]留言框占位提示文字
+            });
+      </script>
+</article>

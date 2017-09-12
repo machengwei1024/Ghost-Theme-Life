@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+      {{!-- Document Settings --}}
+      <meta utf-8 />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+      {{!-- Base Meta --}}
+      <title>{{meta_title}}</title>
+      <meta name="HandheldFriendly" content="True" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      {{!-- Styles'n'Scripts --}}
+      <link rel="stylesheet" type="text/css" href="{{asset "css/bootstrap.min.css"}}" />
+      <link rel="stylesheet" type="text/css" href="{{asset "css/font-awesome.min.css"}}" />
+      <link rel="stylesheet" type="text/css" href="{{asset "css/atom-one-dark.css"}}" />
+      <link rel="stylesheet" type="text/css" href="{{asset "css/jquery.fancybox.css"}}" />
+      <link rel="stylesheet" type="text/css" href="{{asset "css/nprogress.min.css"}}" />
+      <link rel="stylesheet" type="text/css" href="{{asset "css/valine.css"}}" />
+      <link rel="stylesheet" type="text/css" href="{{asset "css/life.css"}}" />
+      <link rel="stylesheet" type="text/css" href="{{asset "css/valine.css"}}" />
+      <script src="{{asset "js/jquery-2.2.4.min.js"}}"></script>
+      <script src="{{asset "config.js"}}"></script>
+      <script src="//cdn1.lncld.net/static/js/3.1.0/av-min.js"></script>
+      <script src="{{asset "js/jquery.qrcode.min.js"}}"></script>
+      <script src="{{asset "js/Valine.min.js"}}"></script>
+
+    {{!-- This tag outputes SEO meta+structured data and other important settings --}}
+
+</head>
+<body>
+<script>AV.init({appId: leanCloud.App_ID,appKey: leanCloud.App_Key});</script>
+<script type="text/javascript">
+      var config = {
+            ClasS: leanCloud.VClass,
+            el:'.views',
+            elP: '.views-post'
+      }
+</script>
+<div class="container">
+      <div class="row blog-box-shadow">
+            <!--博客主栏开始-->
+            <div class="col-xl-9 col-lg-12 blog-main" id="pjax-box">
+                  {{> "site-nav"}}
+                  {{{body}}}
+        {{!-- The footer at the very bottom of the screen --}}
+        <footer class="blog-footer">
+            <p class="blog-footer-left">Copyright © {{date format="YYYY"}} <a href="{{@blog.url}}">{{@blog.title}}</a></p>
+            <p class="blog-footer-right">Powered by <a href="https://ghost.org" target="_blank">Ghost</a>,Themes <a href="https://weic.me/themes-life/" target="_blank">Life</a></p>
+      </footer>
+      </div><!--博客主栏结束-->
+      {{> "sidebar"}}
+      </div>
+</div>
+
+    {{!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. --}}
+    <script src="{{asset "js/jquery.pjax.js"}}"></script>
+    <script src="{{asset "js/nprogress.min.js"}}"></script>
+    <script src="{{asset "js/tether.min.js"}}"></script>
+    <script src="{{asset "js/bootstrap.min.js"}}"></script>
+    <script src="{{asset "js/jquery.fancybox.js"}}"></script>
+    <script src="{{asset "js/highlight.min.js"}}"></script>
+    <script src="{{asset "js/highlightjs-line-numbers.min.js"}}"></script>
+    <script src="{{asset "js/LeanStatistics.min.js"}}"></script>
+    <script src="{{asset "js/Life.js"}}"></script>
+    <script type="text/javascript">
+            hljs.initHighlightingOnLoad();
+            hljs.initLineNumbersOnLoad();
+            otherF();
+            LeanStatistics()
+            $(document).pjax('a', '#pjax-box', {fragment:'#pjax-box', timeout:8000}).on('pjax:complete', function() {
+                  $('pre code').each(function(i, block){
+                  hljs.highlightBlock(block);
+                  })
+                  $('code.hljs').each(function(i, block) {
+                  hljs.lineNumbersBlock(block);
+                  });
+                  LeanStatistics();
+            }).on('pjax:start', function() { NProgress.start(); }).on('pjax:end',   function() {
+                  NProgress.done();
+                  otherF();
+            });
+    </script>
+</body>
+</html>
